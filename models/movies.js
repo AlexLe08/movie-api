@@ -8,25 +8,28 @@ module.exports = ((sequelize, Sequelize) => {
         title: {
             type: Sequelize.STRING,
         },
-        directors: {
-            //Separate table
+        director: {
+            type: Sequelize.STRING,
         },
         releaseDate: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE,
         },
         rating: {
-            type: Sequelize.ENUM('G', 'PG', 'PG-13', 'R', 'Not Rated', 'Passed')
+            type: Sequelize.ENUM('G', 'PG', 'PG-13', 'R', 'Not Rated', 'Passed'),
         },
         runTime: {
             type: Sequelize.STRING
         },
         genres: {
-            //separate table
+            type: Sequelize.STRING
         },
         createdAt: {
             type: Sequelize.DATE,
         },
         updatedAt: {
+            type: Sequelize.DATE,
+        },
+        deletedAt: {
             type: Sequelize.DATE,
         }
 

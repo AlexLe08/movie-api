@@ -14,9 +14,9 @@ app.get("/movies", (request, response) => {
 })
 
 //returns one movie's info based on id number
-app.get("/movies/:id", (request,response) => {
+app.get("/movies/:id", (request, response) => {
     models.movies.findOne({
-        where: {id: request.params.id}
+        where: { id: request.params.id }
     }).then((movies) => {
         if (Number(id) === movies.id) {
             response.send(movies)
@@ -28,28 +28,33 @@ app.get("/movies/:id", (request,response) => {
 })
 
 //accept a JSON formatted movie and add that movie to the database
-app.post("/movies", (request,response) => {
+app.post("/movies", (request, response) => {
 
 })
 
-app.get("/directors", (request,response) => {
+// Returns all directors in api alongside the movies they directed
+app.get("/directors", (request, response) => {
+    models.directors.findAll().then((directors) => {
+        response.send(directors)
+    })
+})
+
+// Returns a single director from api with the movies they directed
+app.get("/directors/:id", (request, response) => {
 
 })
 
-app.get("/directors/:id", (request,response) => {
-    
-})
-
-app.get("/genre", (request,respond) => {
+// Returns all movies in the associated genre
+app.get("/genre", (request, respond) => {
 
 })
 
-app.get("/genre/:gName", (request,respond) => {
-    
+app.get("/genre/:gName", (request, respond) => {
+
 })
 
 //Otherwise
-app.all('*', (request,response) => {
+app.all('*', (request, response) => {
     response.send("Error use /teams or /teams/:id or whatever")
 })
 
