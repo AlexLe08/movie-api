@@ -8,7 +8,7 @@ module.exports = ((sequelize, Sequelize) => {
         title: {
             type: Sequelize.STRING,
         },
-        director: {
+        directors: {
             type: Sequelize.STRING,
         },
         releaseDate: {

@@ -27,9 +27,16 @@ app.get("/movies/:id", (request, response) => {
     })
 })
 
+app.use(bodyParser.json())
 //accept a JSON formatted movie and add that movie to the database
 app.post("/movies", (request, response) => {
-
+    const { title, directors, releaseDate, rating, runTime, genres } = request.body
+    if (!title || !directors || !releaseDate || !rating || !runTime || !genres) {
+        response.status(400).send('You need the movie\'s: title, directors, release date, rating, run time, and genres')
+    }
+    models.movies.create({ title, directors, releaseDate, rating, runTime, genres }).then((newMovie) => {
+        response.status(201).send(newMovie)
+    })
 })
 
 // Returns all directors in api alongside the movies they directed
