@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const allConfigs = require('../config/sequelize')
-const teamsModel = require('./movies')
+const moviesModel = require('./movies')
+const directorsModel = require('./directors')
 
 const config = allConfigs['development']
 
@@ -9,8 +10,12 @@ const connection = new Sequelize(config.database, config.username, config.passwo
     dialect: config.dialect,
 })
 
-const movies = teamsModel(connection, Sequelize)
+const movies = moviesModel(connection, Sequelize)
+const directors = directorsModel(connection, Sequelize, movies)
+
+
 
 module.exports = {
-    movies
+    movies,
+    directors,
 }
