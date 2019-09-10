@@ -39,13 +39,6 @@ app.post("/movies", (request, response) => {
     })
 })
 
-// Returns all directors in api alongside the movies they directed
-app.get("/directors", (request, response) => {
-    models.directors.findAll().then((directors) => {
-        response.send(directors)
-    })
-})
-
 // Returns a single director from api with the movies they directed
 app.get("/directors/:id", (request, response) => {
     models.directors.findOne({
@@ -62,7 +55,7 @@ app.get("/directors/:id", (request, response) => {
 
 
 //Returns all movies based on the genre given as gName
-app.get("/genre/:gName", (request, respond) => {
+app.get("/genre/:gName", (request, response) => {
     models.movies.findOne({
         where: { gName: request.params.genres }
     }).then((genre) => {
