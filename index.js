@@ -1,7 +1,7 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let models = require('./models')
-let Sequelize = require('sequelize')
+
 let port = 1337
 
 let app = express();
@@ -48,16 +48,30 @@ app.get("/directors", (request, response) => {
 
 // Returns a single director from api with the movies they directed
 app.get("/directors/:id", (request, response) => {
-
+    models.directors.findOne({
+        where: { id: request.params.id }
+    }).then((director) => {
+        if (Number(id) === director.id) {
+            response.send(director)
+        }
+        else {
+            response.send("Error: Could not find a director with that ID")
+        }
+    })
 })
 
-// Returns all movies in the associated genre
-app.get("/genre", (request, respond) => {
 
-})
-
+//Returns all movies based on the genre given as gName
 app.get("/genre/:gName", (request, respond) => {
-
+    models.movies.findOne({
+        where: { gName: request.params.genres }
+    }).then((genre) => {
+        if (genre) {
+            response.send(genre)
+        } else {
+            response.sendStatus(404)
+        }
+    })
 })
 
 //Otherwise
